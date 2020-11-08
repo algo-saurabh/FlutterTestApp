@@ -58,7 +58,7 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(
               Icons.shopping_cart,
             ),
-            label: "Cart",
+            label: "Subscription",
           ),
           BottomNavigationBarItem(
             icon: Icon(

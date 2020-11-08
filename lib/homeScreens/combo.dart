@@ -9,13 +9,14 @@ class _ComboScreenState extends State<ComboScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber.shade100,
       appBar: AppBar(
         backgroundColor: Colors.amber.shade600,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_sharp,
           ),
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
         ),

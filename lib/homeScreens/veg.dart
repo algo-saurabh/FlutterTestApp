@@ -12,6 +12,7 @@ class _VegScreenState extends State<VegScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber.shade100,
       appBar: AppBar(
         backgroundColor: Colors.amber.shade600,
         leading: IconButton(
@@ -40,10 +41,10 @@ class _VegScreenState extends State<VegScreen> {
                       height: 140.0,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
-                      )),
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
+                          )),
                     ),
                   ),
                   ExpansionTile(
@@ -151,10 +152,10 @@ class _VegScreenState extends State<VegScreen> {
                       height: 140.0,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
-                      )),
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
+                          )),
                     ),
                   ),
                   ExpansionTile(
@@ -222,7 +223,7 @@ class _VegScreenState extends State<VegScreen> {
                       ),
                       ListTileMoreCustomizable(
                         title:
-                            Text("20 Meals(30 days validity) Rs2000 - 24%Off"),
+                        Text("20 Meals(30 days validity) Rs2000 - 24%Off"),
                         leading: Radio(),
                         horizontalTitleGap: 0.0,
                       ),
@@ -263,10 +264,10 @@ class _VegScreenState extends State<VegScreen> {
                       height: 140.0,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
-                      )),
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                                "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"),
+                          )),
                     ),
                   ),
                   ExpansionTile(
@@ -334,7 +335,7 @@ class _VegScreenState extends State<VegScreen> {
                       ),
                       ListTileMoreCustomizable(
                         title:
-                            Text("20 Meals(30 days validity) Rs2000 - 24%Off"),
+                        Text("20 Meals(30 days validity) Rs2000 - 24%Off"),
                         leading: Radio(),
                         horizontalTitleGap: 0.0,
                       ),

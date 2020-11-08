@@ -12,6 +12,7 @@ class _AddressPageState extends State<AddressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber.shade100,
       appBar: AppBar(
         backgroundColor: Colors.amber.shade600,
         leading: IconButton(
