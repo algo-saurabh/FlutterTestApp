@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'file:///D:/project/flutter_app/lib/homeScreens/combo.dart';
-import 'file:///D:/project/flutter_app/lib/homeScreens/nonVeg.dart';
-import 'file:///D:/project/flutter_app/lib/homeScreens/popular.dart';
-import 'file:///D:/project/flutter_app/lib/homeScreens/veg.dart';
+import 'package:flutter_app/homeScreens/combo.dart';
+import 'package:flutter_app/homeScreens/nonVeg.dart';
+import 'package:flutter_app/homeScreens/popular.dart';
+import 'package:flutter_app/homeScreens/veg.dart';
+import 'package:geocoder/geocoder.dart' as geoCo;
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +14,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String currentlocation = 'Current Location...';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCurrentLocation();
+  }
+
+  getCurrentLocation() async {
+    var positionData = await GeolocatorPlatform.instance.getCurrentPosition();
+    final cords =
+        geoCo.Coordinates(positionData.latitude, positionData.longitude);
+    var address =
+        await geoCo.Geocoder.local.findAddressesFromCoordinates(cords);
+    String mainAddress = address.first.addressLine;
+    setState(() {
+      currentlocation = mainAddress;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,39 +45,42 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: EdgeInsets.only(top: 24.0, left: 8.0, right: 8.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  width: 360,
                   height: 50,
+                  width: 400.0,
+                  constraints: BoxConstraints(maxWidth: 350.0, maxHeight: 80.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade500,
+                          blurRadius: 5,
+                          spreadRadius: 3,
+                        )
+                      ]),
+                  alignment: Alignment.center,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 12.0, right: 12.0),
-                    child: Material(
-                      elevation: 6.0,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: TextField(
-                        style: TextStyle(fontSize: 16.0),
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.location_on,
-                            color: Colors.amber.shade600,
-                            size: 24,
-                          ),
-                          border: InputBorder.none,
-                          hintText: "Choose location",
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 18.0),
-                        ),
-                      ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '${currentlocation}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
+                Divider(),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
+                    SizedBox(
+                      height: 150,
+                      width: 150,
                       child: GestureDetector(
                         child: Image.asset(
                           "assets/images/popular.png",
@@ -70,7 +95,9 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    Expanded(
+                    SizedBox(
+                      height: 150,
+                      width: 150,
                       child: GestureDetector(
                         child: Image.asset(
                           "assets/images/non-veg.png",
@@ -79,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NonVegScreen(),
+                              builder: (context) => NonVegScreen(
+                                address: currentlocation,
+                              ),
                             ),
                           );
                         },
@@ -88,8 +117,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
+                    SizedBox(
+                      height: 150,
+                      width: 150,
                       child: GestureDetector(
                         child: Image.asset(
                           "assets/images/combo.png",
@@ -98,13 +130,17 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ComboScreen(),
+                              builder: (context) => ComboScreen(
+                                address: currentlocation,
+                              ),
                             ),
                           );
                         },
                       ),
                     ),
-                    Expanded(
+                    SizedBox(
+                      height: 150,
+                      width: 150,
                       child: GestureDetector(
                         child: Image.asset(
                           "assets/images/veg.png",
@@ -113,7 +149,8 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => VegScreen(),
+                              builder: (context) =>
+                                  VegScreen(address: currentlocation),
                             ),
                           );
                         },
@@ -121,7 +158,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                Image.asset("assets/images/offer.png"),
+                SizedBox(
+                  child: Image.asset("assets/images/offer.png"),
+                ),
               ],
             ),
           ),

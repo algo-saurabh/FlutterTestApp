@@ -3,7 +3,7 @@ import 'package:flutter_app/accountScreens/profilePage.dart';
 import 'package:flutter_app/cartScreens/cartPage.dart';
 import 'package:flutter_app/favoriteScreens/favoritePage.dart';
 import 'package:flutter_app/homeScreens/homePage.dart';
-import 'package:flutter_app/orderScreens/orderPage.dart';
+import 'orderScreens/orderPage.dart';
 
 class MainPage extends StatefulWidget {
   @override

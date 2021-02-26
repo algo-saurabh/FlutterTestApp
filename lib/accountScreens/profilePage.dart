@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,14 +15,11 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.amber.shade100,
-        appBar: AppBar(
-          backgroundColor: Colors.amber.shade600,
-          title: Text("Profile"),
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Card(
                   elevation: 2.0,
@@ -98,6 +99,25 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         title: Text("Cancellation Policy"),
                       ),
+                      ListTile(
+                        onTap: () async {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.remove('uid');
+                          final googleSignIn = GoogleSignIn();
+                          await googleSignIn.signOut();
+                          Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                  child: Login(),
+                                  type: PageTransitionType.leftToRight));
+                        },
+                        leading: Icon(
+                          Icons.account_balance_wallet,
+                          color: Colors.amber.shade600,
+                        ),
+                        title: Text("Logout"),
+                      ),
                     ],
                   ),
                 ),
@@ -118,17 +138,20 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        RaisedButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24.0),
+                        SizedBox(
+                          width: 80,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24.0),
+                            ),
+                            onPressed: () {},
+                            color: Colors.red,
+                            child: Text(
+                              "Learn More",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            textColor: Colors.white,
                           ),
-                          onPressed: () {},
-                          color: Colors.red,
-                          child: Text(
-                            "Learn More",
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          textColor: Colors.white,
                         ),
                       ],
                     ),
